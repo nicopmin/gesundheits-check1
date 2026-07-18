@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Kontaktdaten eingeben und persönlichen Beratungstermin vereinbaren."
+    >
+
+    <title>Termin vereinbaren</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header class="header">
+
+        <a class="brand" href="index.html">
+
+            <span class="brand-icon">
+                🌿
+            </span>
+
+            <span>
+                <strong>Vitalitätsberatung</strong>
+                <small>Zurück zur Startseite</small>
+            </span>
+
+        </a>
+
+    </header>
+
+
+    <main class="appointment-page">
+
+        <section class="appointment-card">
+
+            <p class="eyebrow">
+                Fast geschafft
+            </p>
+
+            <h1>
+                Persönlichen Beratungstermin vereinbaren
+            </h1>
+
+            <p class="appointment-intro">
+                Tragen Sie zunächst Ihre Kontaktdaten ein.
+                Anschließend können Sie einen passenden Termin auswählen.
+            </p>
+
+
+            <!-- PDF erfolgreich erstellt -->
+
+            <div
+                class="pdf-summary-box"
+                id="pdf-summary-box"
+                hidden
+            >
+
+                <div class="pdf-summary-content">
+
+                    <span class="pdf-summary-icon">
+                        📄
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Ihre PDF-Zusammenfassung wurde erstellt
+                        </strong>
+
+                        <p>
+                            Sie können Ihre persönliche Auswertung
+                            hier herunterladen.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="secondary-button"
+                    id="pdf-download-button"
+                >
+                    PDF herunterladen
+                </button>
+
+            </div>
+
+
+            <!-- Keine PDF vorhanden -->
+
+            <div
+                class="pdf-missing-box"
+                id="pdf-missing-box"
+                hidden
+            >
+
+                <span>
+                    ℹ️
+                </span>
+
+                <p>
+                    Es wurde keine gespeicherte PDF-Auswertung gefunden.
+                    Sie können trotzdem mit der Terminbuchung fortfahren.
+                </p>
+
+                <a
+                    class="secondary-link"
+                    href="fragen.html"
+                >
+                    Check erneut ausfüllen
+                </a>
+
+            </div>
+
+
+            <!-- Schritt 1: Kontaktdaten -->
+
+            <section
+                class="contact-form-section"
+                id="contact-form-section"
+            >
+
+                <div class="contact-form-heading">
+
+                    <span class="contact-step-number">
+                        1
+                    </span>
+
+                    <div>
+
+                        <h2>
+                            Ihre Kontaktdaten
+                        </h2>
+
+                        <p>
+                            Vorname und Nachname sind Pflichtfelder.
+                            Zusätzlich benötigen wir mindestens eine
+                            E-Mail-Adresse oder Telefonnummer.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <form
+                    class="contact-form"
+                    id="contact-form"
+                    novalidate
+                >
+
+                    <div class="contact-form-grid">
+
+                        <div class="form-field">
+
+                            <label for="first-name">
+                                Vorname
+                                <span aria-hidden="true">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="first-name"
+                                name="firstName"
+                                autocomplete="given-name"
+                                required
+                            >
+
+                            <small
+                                class="field-error"
+                                id="first-name-error"
+                            ></small>
+
+                        </div>
+
+
+                        <div class="form-field">
+
+                            <label for="last-name">
+                                Nachname
+                                <span aria-hidden="true">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="last-name"
+                                name="lastName"
+                                autocomplete="family-name"
+                                required
+                            >
+
+                            <small
+                                class="field-error"
+                                id="last-name-error"
+                            ></small>
+
+                        </div>
+
+
+                        <div class="form-field">
+
+                            <label for="email">
+                                E-Mail-Adresse
+                            </label>
+
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                autocomplete="email"
+                                inputmode="email"
+                                placeholder="name@beispiel.de"
+                            >
+
+                            <small
+                                class="field-error"
+                                id="email-error"
+                            ></small>
+
+                        </div>
+
+
+                        <div class="form-field">
+
+                            <label for="phone">
+                                Telefonnummer
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="phone"
+                                name="phone"
+                                autocomplete="tel"
+                                inputmode="tel"
+                                placeholder="+49 ..."
+                            >
+
+                            <small
+                                class="field-error"
+                                id="phone-error"
+                            ></small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="contact-requirement"
+                        id="contact-requirement"
+                    >
+
+                        <span>
+                            ℹ️
+                        </span>
+
+                        <p>
+                            Bitte geben Sie mindestens eine E-Mail-Adresse
+                            oder eine Telefonnummer an.
+                        </p>
+
+                    </div>
+
+
+                    <label class="contact-consent">
+
+                        <input
+                            type="checkbox"
+                            id="contact-consent"
+                            name="contactConsent"
+                            required
+                        >
+
+                        <span>
+                            Ich bin damit einverstanden, dass meine Angaben
+                            zur Kontaktaufnahme und zur Vorbereitung des
+                            Beratungsgesprächs verwendet werden.
+                            <strong>*</strong>
+                        </span>
+
+                    </label>
+
+                    <small
+                        class="field-error consent-error"
+                        id="consent-error"
+                    ></small>
+
+
+                    <button
+                        type="submit"
+                        class="primary-button contact-submit-button"
+                    >
+                        Weiter zur Terminbuchung
+                        <span>→</span>
+                    </button>
+
+                </form>
+
+            </section>
+
+
+            <!-- Schritt 2: Cal.com -->
+
+            <section
+                class="calendar-booking-section"
+                id="calendar-booking-section"
+                hidden
+            >
+
+                <div class="calendar-heading">
+
+                    <span class="contact-step-number">
+                        2
+                    </span>
+
+                    <div>
+
+                        <h2>
+                            Termin auswählen
+                        </h2>
+
+                        <p>
+                            Wählen Sie jetzt den gewünschten Ereignistyp
+                            und anschließend einen passenden freien Termin.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="calendar-contact-summary">
+
+                    <div>
+
+                        <span>
+                            Kontaktdaten
+                        </span>
+
+                        <strong id="contact-summary-name"></strong>
+
+                        <small id="contact-summary-details"></small>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        class="edit-contact-button"
+                        id="edit-contact-button"
+                    >
+                        Angaben ändern
+                    </button>
+
+                </div>
+
+
+                <div class="calendar-container">
+
+                    <div
+                        class="cal-inline"
+                        id="my-cal-inline-nico-pm"
+                    ></div>
+
+                </div>
+
+            </section>
+
+
+            <!-- Schritt 3: Danksagung -->
+
+            <section
+                class="booking-thank-you"
+                id="booking-thank-you"
+                hidden
+            >
+
+                <div class="thank-you-icon">
+                    ✓
+                </div>
+
+                <p class="eyebrow">
+                    Termin erfolgreich gebucht
+                </p>
+
+                <h2>
+                    Vielen Dank für Ihr Vertrauen.
+                </h2>
+
+                <p class="thank-you-text">
+                    Ich freue mich auf unser
+                    <strong id="thank-you-event-type">
+                        persönliches Kennenlernen
+                    </strong>.
+                </p>
+
+
+                <div
+                    class="thank-you-date"
+                    id="thank-you-date"
+                    hidden
+                >
+
+                    <span>
+                        📅
+                    </span>
+
+                    <div>
+
+                        <small>
+                            Ihr Termin
+                        </small>
+
+                        <strong id="thank-you-date-text"></strong>
+
+                    </div>
+
+                </div>
+
+
+                <p class="small-note">
+                    Sie erhalten zusätzlich eine Terminbestätigung
+                    über Cal.com.
+                </p>
+
+                <a
+                    class="primary-button"
+                    href="index.html"
+                >
+                    Zurück zur Startseite
+                    <span>→</span>
+                </a>
+
+            </section>
+
+
+            <!-- Zusätzliche Hinweise -->
+
+            <div
+                class="appointment-info"
+                id="appointment-info"
+            >
+
+                <div class="appointment-info-item">
+
+                    <span class="appointment-info-icon">
+                        💻
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Persönliches Gespräch
+                        </strong>
+
+                        <p>
+                            Wählen Sie in der Terminübersicht den für Sie
+                            passenden Ereignistyp aus.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="appointment-info-item">
+
+                    <span class="appointment-info-icon">
+                        🔒
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Vertrauliche Behandlung
+                        </strong>
+
+                        <p>
+                            Ihre Angaben werden zur Kontaktaufnahme und
+                            Vorbereitung des Gesprächs verwendet.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="appointment-info-item">
+
+                    <span class="appointment-info-icon">
+                        🤝
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Kostenlos und unverbindlich
+                        </strong>
+
+                        <p>
+                            Durch die Terminbuchung entsteht keine
+                            Kaufverpflichtung.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer class="footer">
+
+        <p>
+            Persönliche Partner- und Beratungsseite
+        </p>
+
+        <p>
+            Kein Ersatz für ärztliche Beratung,
+            Diagnose oder Behandlung.
+        </p>
+
+    </footer>
+
+
+    <!-- Cal.com Embed laden -->
+
+    <script>
+        (function (C, A, L) {
+            const pushToQueue = function (api, args) {
+                api.q.push(args);
+            };
+
+            const documentObject = C.document;
+
+            C.Cal = C.Cal || function () {
+                const cal = C.Cal;
+                const args = arguments;
+
+                if (!cal.loaded) {
+                    cal.ns = {};
+                    cal.q = cal.q || [];
+
+                    const script =
+                        documentObject.createElement("script");
+
+                    script.src = A;
+                    script.async = true;
+
+                    documentObject.head.appendChild(script);
+
+                    cal.loaded = true;
+                }
+
+                if (args[0] === L) {
+                    const namespace = args[1];
+
+                    const namespacedApi = function () {
+                        pushToQueue(
+                            namespacedApi,
+                            arguments
+                        );
+                    };
+
+                    namespacedApi.q =
+                        namespacedApi.q || [];
+
+                    if (typeof namespace === "string") {
+                        cal.ns[namespace] =
+                            cal.ns[namespace] ||
+                            namespacedApi;
+
+                        pushToQueue(
+                            cal.ns[namespace],
+                            args
+                        );
+
+                        pushToQueue(
+                            cal,
+                            [
+                                "initNamespace",
+                                namespace
+                            ]
+                        );
+                    } else {
+                        pushToQueue(cal, args);
+                    }
+
+                    return;
+                }
+
+                pushToQueue(cal, args);
+            };
+        })(
+            window,
+            "https://app.cal.com/embed/embed.js",
+            "init"
+        );
+
+
+        Cal("init", "nicoPm", {
+            origin: "https://cal.com"
+        });
+    </script>
+
+
+    <!-- Seitenlogik -->
+
+    <script>
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+                const contactFormSection =
+                    document.querySelector(
+                        "#contact-form-section"
+                    );
+
+                const contactForm =
+                    document.querySelector(
+                        "#contact-form"
+                    );
+
+                const firstNameInput =
+                    document.querySelector(
+                        "#first-name"
+                    );
+
+                const lastNameInput =
+                    document.querySelector(
+                        "#last-name"
+                    );
+
+                const emailInput =
+                    document.querySelector(
+                        "#email"
+                    );
+
+                const phoneInput =
+                    document.querySelector(
+                        "#phone"
+                    );
+
+                const consentInput =
+                    document.querySelector(
+                        "#contact-consent"
+                    );
+
+                const calendarSection =
+                    document.querySelector(
+                        "#calendar-booking-section"
+                    );
+
+                const thankYouSection =
+                    document.querySelector(
+                        "#booking-thank-you"
+                    );
+
+                const appointmentInfo =
+                    document.querySelector(
+                        "#appointment-info"
+                    );
+
+                const summaryName =
+                    document.querySelector(
+                        "#contact-summary-name"
+                    );
+
+                const summaryDetails =
+                    document.querySelector(
+                        "#contact-summary-details"
+                    );
+
+                const editButton =
+                    document.querySelector(
+                        "#edit-contact-button"
+                    );
+
+
+                initializePdfDownload();
+                restoreContactData();
+
+
+                contactForm.addEventListener(
+                    "submit",
+                    function (event) {
+                        event.preventDefault();
+
+                        clearErrors();
+
+                        const contactData = {
+                            firstName:
+                                firstNameInput.value.trim(),
+
+                            lastName:
+                                lastNameInput.value.trim(),
+
+                            email:
+                                emailInput.value.trim(),
+
+                            phone:
+                                phoneInput.value.trim()
+                        };
+
+                        const formIsValid =
+                            validateContactForm(
+                                contactData,
+                                consentInput.checked
+                            );
+
+                        if (!formIsValid) {
+                            focusFirstInvalidField();
+                            return;
+                        }
+
+                        saveContactData(contactData);
+                        showCalendar(contactData);
+                    }
+                );
+
+
+                editButton.addEventListener(
+                    "click",
+                    function () {
+                        calendarSection.hidden = true;
+                        contactFormSection.hidden = false;
+
+                        contactFormSection.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start"
+                        });
+                    }
+                );
+
+
+                Cal.ns.nicoPm("on", {
+                    action: "bookingSuccessfulV2",
+
+                    callback: function (event) {
+                        const bookingData =
+                            event &&
+                            event.detail &&
+                            event.detail.data
+                                ? event.detail.data
+                                : {};
+
+                        showBookingThankYou(
+                            bookingData
+                        );
+                    }
+                });
+
+
+                function validateContactForm(
+                    contactData,
+                    consentAccepted
+                ) {
+                    let formIsValid = true;
+
+
+                    if (!contactData.firstName) {
+                        showError(
+                            "first-name",
+                            "Bitte geben Sie Ihren Vornamen ein."
+                        );
+
+                        formIsValid = false;
+                    }
+
+
+                    if (!contactData.lastName) {
+                        showError(
+                            "last-name",
+                            "Bitte geben Sie Ihren Nachnamen ein."
+                        );
+
+                        formIsValid = false;
+                    }
+
+
+                    if (
+                        contactData.email &&
+                        !isValidEmail(contactData.email)
+                    ) {
+                        showError(
+                            "email",
+                            "Bitte geben Sie eine gültige E-Mail-Adresse ein."
+                        );
+
+                        formIsValid = false;
+                    }
+
+
+                    if (
+                        contactData.phone &&
+                        !isValidPhone(contactData.phone)
+                    ) {
+                        showError(
+                            "phone",
+                            "Bitte geben Sie eine gültige Telefonnummer ein."
+                        );
+
+                        formIsValid = false;
+                    }
+
+
+                    if (
+                        !contactData.email &&
+                        !contactData.phone
+                    ) {
+                        showError(
+                            "email",
+                            "Bitte geben Sie eine E-Mail-Adresse oder Telefonnummer ein."
+                        );
+
+                        showError(
+                            "phone",
+                            "Bitte geben Sie eine Telefonnummer oder E-Mail-Adresse ein."
+                        );
+
+                        formIsValid = false;
+                    }
+
+
+                    if (!consentAccepted) {
+                        const consentError =
+                            document.querySelector(
+                                "#consent-error"
+                            );
+
+                        consentError.textContent =
+                            "Bitte bestätigen Sie die Einwilligung.";
+
+                        consentInput.classList.add(
+                            "input-error"
+                        );
+
+                        formIsValid = false;
+                    }
+
+
+                    return formIsValid;
+                }
+
+
+                function showCalendar(contactData) {
+                    const fullName =
+                        contactData.firstName +
+                        " " +
+                        contactData.lastName;
+
+                    summaryName.textContent =
+                        fullName;
+
+                    summaryDetails.textContent =
+                        createContactSummary(
+                            contactData
+                        );
+
+                    contactFormSection.hidden = true;
+                    thankYouSection.hidden = true;
+                    calendarSection.hidden = false;
+
+                    if (appointmentInfo) {
+                        appointmentInfo.hidden = false;
+                    }
+
+                    loadCalendar(contactData);
+
+                    calendarSection.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start"
+                    });
+                }
+            }
+        );
+
+
+        let calendarWasLoaded = false;
+
+
+        function loadCalendar(contactData) {
+            if (calendarWasLoaded) {
+                return;
+            }
+
+            const fullName =
+                contactData.firstName +
+                " " +
+                contactData.lastName;
+
+            const calendarConfig = {
+                layout: "month_view",
+                theme: "light",
+                name: fullName
+            };
+
+
+            if (contactData.email) {
+                calendarConfig.email =
+                    contactData.email;
+            }
+
+
+            /*
+             * Die Profilseite zeigt alle sichtbaren
+             * Ereignistypen des Cal.com-Profils an.
+             */
+
+            Cal.ns.nicoPm("inline", {
+                elementOrSelector:
+                    "#my-cal-inline-nico-pm",
+
+                calLink:
+                    "nico-pm",
+
+                config:
+                    calendarConfig
+            });
+
+
+            Cal.ns.nicoPm("ui", {
+                layout: "month_view",
+                theme: "light",
+                hideEventTypeDetails: false
+            });
+
+
+            calendarWasLoaded = true;
+        }
+
+
+        function showBookingThankYou(bookingData) {
+            const contactFormSection =
+                document.querySelector(
+                    "#contact-form-section"
+                );
+
+            const calendarSection =
+                document.querySelector(
+                    "#calendar-booking-section"
+                );
+
+            const thankYouSection =
+                document.querySelector(
+                    "#booking-thank-you"
+                );
+
+            const appointmentInfo =
+                document.querySelector(
+                    "#appointment-info"
+                );
+
+            const eventTypeElement =
+                document.querySelector(
+                    "#thank-you-event-type"
+                );
+
+            const dateBox =
+                document.querySelector(
+                    "#thank-you-date"
+                );
+
+            const dateText =
+                document.querySelector(
+                    "#thank-you-date-text"
+                );
+
+
+            if (!thankYouSection) {
+                return;
+            }
+
+
+            const eventTypeName =
+                getEventTypeName(
+                    bookingData
+                );
+
+
+            if (eventTypeElement) {
+                eventTypeElement.textContent =
+                    eventTypeName;
+            }
+
+
+            if (
+                bookingData.startTime &&
+                dateBox &&
+                dateText
+            ) {
+                const formattedDate =
+                    formatBookingDate(
+                        bookingData.startTime
+                    );
+
+                if (formattedDate) {
+                    dateText.textContent =
+                        formattedDate;
+
+                    dateBox.hidden = false;
+                }
+            }
+
+
+            if (contactFormSection) {
+                contactFormSection.hidden = true;
+            }
+
+            if (calendarSection) {
+                calendarSection.hidden = true;
+            }
+
+            if (appointmentInfo) {
+                appointmentInfo.hidden = true;
+            }
+
+            thankYouSection.hidden = false;
+
+
+            sessionStorage.setItem(
+                "bookingCompleted",
+                "true"
+            );
+
+            sessionStorage.setItem(
+                "bookingEventType",
+                eventTypeName
+            );
+
+
+            if (bookingData.startTime) {
+                sessionStorage.setItem(
+                    "bookingStartTime",
+                    bookingData.startTime
+                );
+            }
+
+
+            thankYouSection.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        }
+
+
+        function getEventTypeName(bookingData) {
+            const title =
+                String(
+                    bookingData.title || ""
+                ).trim();
+
+
+            if (!title) {
+                return "persönliches Kennenlernen";
+            }
+
+
+            const normalizedTitle =
+                title.toLowerCase();
+
+
+            if (
+                normalizedTitle.includes(
+                    "telefon"
+                )
+            ) {
+                return "telefonisches Kennenlernen";
+            }
+
+
+            if (
+                normalizedTitle.includes(
+                    "online"
+                )
+            ) {
+                return "Online-Kennenlernen";
+            }
+
+
+            if (
+                normalizedTitle.includes(
+                    "video"
+                )
+            ) {
+                return "Video-Kennenlernen";
+            }
+
+
+            if (
+                normalizedTitle.includes(
+                    "persönlich"
+                )
+            ) {
+                return "persönliches Kennenlernen";
+            }
+
+
+            return title;
+        }
+
+
+        function formatBookingDate(startTime) {
+            const bookingDate =
+                new Date(startTime);
+
+
+            if (
+                Number.isNaN(
+                    bookingDate.getTime()
+                )
+            ) {
+                return "";
+            }
+
+
+            return new Intl.DateTimeFormat(
+                "de-DE",
+                {
+                    weekday: "long",
+                    day: "2-digit",
+                    month: "long",
+                    year: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit"
+                }
+            ).format(bookingDate) + " Uhr";
+        }
+
+
+        function createContactSummary(contactData) {
+            const details = [];
+
+
+            if (contactData.email) {
+                details.push(
+                    contactData.email
+                );
+            }
+
+
+            if (contactData.phone) {
+                details.push(
+                    contactData.phone
+                );
+            }
+
+
+            return details.join(" · ");
+        }
+
+
+        function saveContactData(contactData) {
+            sessionStorage.setItem(
+                "contactFirstName",
+                contactData.firstName
+            );
+
+            sessionStorage.setItem(
+                "contactLastName",
+                contactData.lastName
+            );
+
+            sessionStorage.setItem(
+                "contactEmail",
+                contactData.email
+            );
+
+            sessionStorage.setItem(
+                "contactPhone",
+                contactData.phone
+            );
+        }
+
+
+        function restoreContactData() {
+            const firstName =
+                sessionStorage.getItem(
+                    "contactFirstName"
+                ) || "";
+
+            const lastName =
+                sessionStorage.getItem(
+                    "contactLastName"
+                ) || "";
+
+            const email =
+                sessionStorage.getItem(
+                    "contactEmail"
+                ) || "";
+
+            const phone =
+                sessionStorage.getItem(
+                    "contactPhone"
+                ) || "";
+
+
+            document.querySelector(
+                "#first-name"
+            ).value = firstName;
+
+            document.querySelector(
+                "#last-name"
+            ).value = lastName;
+
+            document.querySelector(
+                "#email"
+            ).value = email;
+
+            document.querySelector(
+                "#phone"
+            ).value = phone;
+        }
+
+
+        function initializePdfDownload() {
+            const pdfData =
+                sessionStorage.getItem(
+                    "vitalitaetsPdf"
+                );
+
+            const pdfFileName =
+                sessionStorage.getItem(
+                    "vitalitaetsPdfDateiname"
+                );
+
+            const pdfBox =
+                document.querySelector(
+                    "#pdf-summary-box"
+                );
+
+            const pdfMissingBox =
+                document.querySelector(
+                    "#pdf-missing-box"
+                );
+
+            const pdfButton =
+                document.querySelector(
+                    "#pdf-download-button"
+                );
+
+
+            if (
+                pdfData &&
+                pdfBox &&
+                pdfButton
+            ) {
+                pdfBox.hidden = false;
+
+                if (pdfMissingBox) {
+                    pdfMissingBox.hidden = true;
+                }
+
+                pdfButton.addEventListener(
+                    "click",
+                    function () {
+                        downloadPdf(
+                            pdfData,
+                            pdfFileName
+                        );
+                    }
+                );
+
+                return;
+            }
+
+
+            if (pdfMissingBox) {
+                pdfMissingBox.hidden = false;
+            }
+        }
+
+
+        function downloadPdf(
+            pdfData,
+            pdfFileName
+        ) {
+            try {
+                const link =
+                    document.createElement("a");
+
+                link.href = pdfData;
+
+                link.download =
+                    pdfFileName ||
+                    "vitalitaets-check.pdf";
+
+                document.body.appendChild(link);
+
+                link.click();
+                link.remove();
+            } catch (error) {
+                console.error(
+                    "PDF konnte nicht heruntergeladen werden:",
+                    error
+                );
+
+                alert(
+                    "Die PDF konnte leider nicht heruntergeladen werden."
+                );
+            }
+        }
+
+
+        function showError(
+            fieldName,
+            message
+        ) {
+            const input =
+                document.querySelector(
+                    "#" + fieldName
+                );
+
+            const error =
+                document.querySelector(
+                    "#" + fieldName + "-error"
+                );
+
+
+            if (input) {
+                input.classList.add(
+                    "input-error"
+                );
+            }
+
+
+            if (error) {
+                error.textContent = message;
+            }
+        }
+
+
+        function clearErrors() {
+            document
+                .querySelectorAll(
+                    ".input-error"
+                )
+                .forEach(function (input) {
+                    input.classList.remove(
+                        "input-error"
+                    );
+                });
+
+
+            document
+                .querySelectorAll(
+                    ".field-error"
+                )
+                .forEach(function (error) {
+                    error.textContent = "";
+                });
+        }
+
+
+        function focusFirstInvalidField() {
+            const firstInvalidField =
+                document.querySelector(
+                    "#contact-form .input-error"
+                );
+
+
+            if (firstInvalidField) {
+                firstInvalidField.focus();
+            }
+        }
+
+
+        function isValidEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+                email
+            );
+        }
+
+
+        function isValidPhone(phone) {
+            const normalizedPhone =
+                phone.replace(
+                    /[\s()./-]/g,
+                    ""
+                );
+
+
+            return /^\+?[0-9]{6,20}$/.test(
+                normalizedPhone
+            );
+        }
+    </script>
+
+</body>
+
+</html>
