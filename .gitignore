@@ -1,0 +1,15 @@
+# Betriebssystem-Dateien
+Thumbs.db
+Desktop.ini
+
+# Editor-Dateien
+.vscode/
+.idea/
+
+# Temporäre Dateien
+*.tmp
+*.log
+
+# Umgebungsvariablen und Zugangsdaten
+.env
+.env.*
