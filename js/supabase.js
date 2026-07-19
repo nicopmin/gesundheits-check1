@@ -250,10 +250,7 @@ async function uploadVitalitaetsPdf() {
         };
     }
 
-    console.log(
-        "PDF-Upload erfolgreich:",
-        data
-    );
+    console.log("PDF-Upload erfolgreich:", data);
         if (!data || data.success !== true) {
         return {
             success: false,
@@ -272,6 +269,13 @@ async function uploadVitalitaetsPdf() {
     "vitalitaetsPdfSignedUrl",
     data.signedUrl
 );
+
+window.dispatchEvent(
+    new CustomEvent("vitalitaetsPdfBereit", {
+        detail: { signedUrl: data.signedUrl }
+    })
+);
+
     return {
         success: true,
         data: data

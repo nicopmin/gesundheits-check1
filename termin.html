@@ -921,23 +921,14 @@ showCalendar(contactData);
             }
 
             const fullName =
-                contactData.firstName +
-                " " +
-                contactData.lastName;
+    contactData.firstName +
+    " " +
+    contactData.lastName;
 
-                const pdfSignedUrl =
-    sessionStorage.getItem(
-        "vitalitaetsPdfSignedUrl"
-    ) || "";
+window.addEventListener("vitalitaetsPdfBereit", (event) => {
+    const pdfSignedUrl = event.detail.signedUrl;
 
-const pdfSignedUrl =
-    sessionStorage.getItem("vitalitaetsPdfSignedUrl") || "";
-
-if (!pdfSignedUrl) {
-    console.log("PDF-Link noch nicht vorhanden – Cal wird noch nicht gestartet.");
-    return;
-}
-
+    console.log("PDF für Cal bereit:", pdfSignedUrl);
     console.log(">>> Cal-Code wird ausgeführt");
 
     console.log("PDF Link für Cal:", pdfSignedUrl);
@@ -982,6 +973,7 @@ if (!pdfSignedUrl) {
 
 
             calendarWasLoaded = true;
+        });
         }
 
 
