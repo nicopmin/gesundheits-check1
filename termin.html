@@ -929,9 +929,18 @@ showCalendar(contactData);
     sessionStorage.getItem(
         "vitalitaetsPdfSignedUrl"
     ) || "";
-    
-console.log(">>> Cal-Code wird ausgeführt");
-console.log("PDF Link für Cal:", pdfSignedUrl);
+
+const pdfSignedUrl =
+    sessionStorage.getItem("vitalitaetsPdfSignedUrl") || "";
+
+if (!pdfSignedUrl) {
+    console.log("PDF-Link noch nicht vorhanden – Cal wird noch nicht gestartet.");
+    return;
+}
+
+    console.log(">>> Cal-Code wird ausgeführt");
+
+    console.log("PDF Link für Cal:", pdfSignedUrl);
 
             const calendarConfig = {
                 layout: "month_view",
