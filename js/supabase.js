@@ -263,7 +263,10 @@ async function uploadVitalitaetsPdf() {
                     : "PDF-Upload fehlgeschlagen"
         };
     }
-
+sessionStorage.setItem(
+    "vitalitaetsPdfSignedUrl",
+    data.signedUrl
+);
     return {
         success: true,
         data: data

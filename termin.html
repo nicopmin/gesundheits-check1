@@ -925,10 +925,16 @@ showCalendar(contactData);
                 " " +
                 contactData.lastName;
 
+                const pdfSignedUrl =
+    sessionStorage.getItem(
+        "vitalitaetsPdfSignedUrl"
+    ) || "";
+
             const calendarConfig = {
                 layout: "month_view",
                 theme: "light",
-                name: fullName
+                name: fullName,
+                notes: `Ihren Vitalitätscheck können Sie hier einsehen:\n\n${pdfSignedUrl}`,
             };
 
 
@@ -942,6 +948,7 @@ showCalendar(contactData);
              * Die Profilseite zeigt alle sichtbaren
              * Ereignistypen des Cal.com-Profils an.
              */
+
 
             Cal.ns.nicoPm("inline", {
                 elementOrSelector:
