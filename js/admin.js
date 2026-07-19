@@ -239,5 +239,15 @@ ladeVitalitaetsChecks().then(() => {
     document
         .querySelector("#statusFilter")
         .addEventListener("change", filtereTabelle);
+    
+    document
+    .querySelector("#filterReset")
+    .addEventListener("click", () => {
+
+        document.querySelector("#suche").value = "";
+        document.querySelector("#statusFilter").value = "Alle";
+
+        filtereTabelle();
+    });
 
 });
