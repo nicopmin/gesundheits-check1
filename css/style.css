@@ -2284,3 +2284,9 @@ body:has(.final-cta) .footer {
         grid-template-columns: 1fr;
     }
 }
+.table-info {
+    display: block;
+    padding: 10px 0;
+    font-size: 14px;
+    color: #6b7280;
+}

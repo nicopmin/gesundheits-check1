@@ -92,6 +92,8 @@ function filtereTabelle() {
         "#checksTable tbody tr"
     );
 
+    let sichtbareZeilen = 0;
+
     zeilen.forEach((zeile) => {
         const zeilenText = zeile.textContent.toLowerCase();
 
@@ -104,12 +106,20 @@ function filtereTabelle() {
             ausgewaehlterStatus === "Alle" ||
             status === ausgewaehlterStatus;
 
-        zeile.style.display =
-            passtZurSuche && passtZumStatus
-                ? ""
-                : "none";
+        const istSichtbar =
+            passtZurSuche && passtZumStatus;
+
+        zeile.style.display = istSichtbar
+            ? ""
+            : "none";
+
+        if (istSichtbar) {
+            sichtbareZeilen++;
+        }
     });
 
+    document.getElementById("tableInfo").textContent =
+        `${zeilen.length} Datensätze • ${sichtbareZeilen} angezeigt`;
 }
 async function ladeVitalitaetsChecks() {
     const { data, error } =
@@ -127,6 +137,9 @@ async function ladeVitalitaetsChecks() {
 );
 
 tbody.innerHTML = "";
+
+document.getElementById("tableInfo").textContent =
+    `${data.data.length} Datensätze`;
 
 console.log("PDF-Wert:", data.data[0]?.pdf_url);
 
