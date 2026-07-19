@@ -37,6 +37,19 @@ async function statusSpeichern(id, neuerStatus) {
         return;
     }
 
+    const statusKlasse = neuerStatus
+        .toLowerCase()
+        .replaceAll(" ", "-")
+        .replaceAll("ä", "ae")
+        .replaceAll("ö", "oe")
+        .replaceAll("ü", "ue");
+
+    const statusPunkt = document.querySelector(`#status-dot-${id}`);
+
+    if (statusPunkt) {
+        statusPunkt.className = `status-dot status-${statusKlasse}`;
+    }
+
     console.log("Status gespeichert:", data);
 }
 async function ladeVitalitaetsChecks() {
@@ -62,7 +75,17 @@ data.data.forEach((check) => {
     const row = document.createElement("tr");
 
     row.innerHTML = `
-    <td>${new Date(check.created_at).toLocaleString("de-DE")}</td>
+    <td>
+    <span class="status-dot status-${(check.customer_status ?? "Neu")
+    .toLowerCase()
+    .replaceAll(" ", "-")
+    .replaceAll("ä", "ae")
+    .replaceAll("ö", "oe")
+    .replaceAll("ü", "ue")
+}" id="status-dot-${check.id}"></span>
+</td>
+
+<td>${new Date(check.created_at).toLocaleString("de-DE")}</td>
     <td>${check.first_name ?? ""} ${check.last_name ?? ""}</td>
     <td>${check.email ?? ""}</td>
     <td>

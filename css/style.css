@@ -2137,3 +2137,100 @@ body:has(.final-cta) .footer {
         width: 100%;
     }
 }
+.admin-page {
+    min-height: 100vh;
+    padding: 40px 20px;
+    background: #f4f7f5;
+}
+
+.admin-card {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 32px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+}
+
+.admin-header h1 {
+    margin: 0 0 8px;
+}
+
+.admin-header p {
+    margin: 0;
+}
+
+.admin-toolbar {
+    margin: 28px 0 20px;
+}
+
+.admin-toolbar input {
+    width: 100%;
+    max-width: 420px;
+    padding: 12px 14px;
+    border: 1px solid #cfd8d3;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.admin-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+#checksTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#checksTable th,
+#checksTable td {
+    padding: 14px 12px;
+    text-align: left;
+    border-bottom: 1px solid #e4e9e6;
+    white-space: nowrap;
+}
+
+#checksTable th:first-child,
+#checksTable td:first-child {
+    padding-left: 0;
+}
+
+#checksTable th {
+    font-weight: 700;
+    background: #f7f9f8;
+}
+
+#checksTable button,
+#checksTable select {
+    padding: 9px 12px;
+    border: 1px solid #cfd8d3;
+    border-radius: 7px;
+    font: inherit;
+}
+
+#checksTable button {
+    cursor: pointer;
+}
+.status-dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.status-neu {
+    background: #3498db;
+}
+
+.status-beratung-erfolgt {
+    background: #f39c12;
+}
+
+.status-kunde-geworden {
+    background: #27ae60;
+}
+
+.status-kein-interesse {
+    background: #e74c3c;
+}
