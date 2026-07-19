@@ -1,5 +1,19 @@
 let datumAbsteigend = true;
 
+async function pruefeLogin() {
+    const {
+        data: { user },
+        error
+    } = await supabaseClient.auth.getUser();
+
+    if (error || !user) {
+        window.location.replace("admin-login.html");
+        return false;
+    }
+
+    return true;
+}
+
 async function pdfOeffnen(pdfPath) {
     const { data, error } =
         await supabaseClient.functions.invoke(
@@ -252,9 +266,22 @@ data.data.forEach((check) => {
 
     tbody.appendChild(row);
 });
+
+sortiereNachDatum();
+
 }
 
-ladeVitalitaetsChecks().then(() => {
+async function init() {
+    const istAngemeldet = await pruefeLogin();
+
+    if (!istAngemeldet) {
+        return;
+    }
+
+    await ladeVitalitaetsChecks();
+}
+
+init();
 
     document
         .querySelector("#suche")
@@ -287,5 +314,3 @@ ladeVitalitaetsChecks().then(() => {
 
         sortiereNachDatum();
     });
-
-});
