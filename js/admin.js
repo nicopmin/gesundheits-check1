@@ -1,3 +1,5 @@
+let datumAbsteigend = true;
+
 async function pdfOeffnen(pdfPath) {
     const { data, error } =
         await supabaseClient.functions.invoke(
@@ -121,6 +123,26 @@ function filtereTabelle() {
     document.getElementById("tableInfo").textContent =
         `${zeilen.length} Datensätze • ${sichtbareZeilen} angezeigt`;
 }
+
+function sortiereNachDatum() {
+    const tbody = document.querySelector("#checksTable tbody");
+
+    const zeilen = Array.from(tbody.querySelectorAll("tr"));
+
+    zeilen.sort((a, b) => {
+        const datumA = new Date(a.dataset.createdAt);
+        const datumB = new Date(b.dataset.createdAt);
+
+        return datumAbsteigend
+            ? datumB - datumA
+            : datumA - datumB;
+    });
+
+    zeilen.forEach((zeile) => {
+        tbody.appendChild(zeile);
+    });
+}
+
 async function ladeVitalitaetsChecks() {
     const { data, error } =
         await supabaseClient.functions.invoke(
@@ -166,6 +188,8 @@ document.querySelector("#stat-kein").textContent = anzahlKeinInteresse;
 
 data.data.forEach((check) => {
     const row = document.createElement("tr");
+
+    row.dataset.createdAt = check.created_at;
 
     row.innerHTML = `
     <td>
@@ -248,6 +272,20 @@ ladeVitalitaetsChecks().then(() => {
         document.querySelector("#statusFilter").value = "Alle";
 
         filtereTabelle();
+    });
+
+    document
+    .querySelector("#datumHeader")
+    .addEventListener("click", () => {
+
+        datumAbsteigend = !datumAbsteigend;
+
+        document.querySelector("#datumHeader").textContent =
+            datumAbsteigend
+                ? "Datum ▼"
+                : "Datum ▲";
+
+        sortiereNachDatum();
     });
 
 });
