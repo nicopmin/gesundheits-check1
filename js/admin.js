@@ -235,6 +235,7 @@ data.data.forEach((check) => {
                 : ""
         }
     </td>
+</td>
     <td>
     <select onchange="statusSpeichern('${check.id}', this.value)">
         <option ${
@@ -261,6 +262,14 @@ data.data.forEach((check) => {
                 : ""
         }>Kein Interesse</option>
     </select>
+    <td onclick="notizBearbeiten('${check.id}', '${check.notiz ?? ""}')"
+    style="cursor:pointer;">
+    ${
+        check.notiz
+            ? "📝 " + check.notiz.substring(0, 25) + (check.notiz.length > 25 ? "..." : "")
+            : "📝 Keine"
+    }
+</td>
 </td>
 `;
 
@@ -269,6 +278,40 @@ data.data.forEach((check) => {
 
 sortiereNachDatum();
 
+}
+
+async function notizBearbeiten(id, aktuelleNotiz) {
+    const neueNotiz = prompt(
+        "Notiz bearbeiten:",
+        aktuelleNotiz
+    );
+
+    if (neueNotiz === null) {
+        return;
+    }
+
+    console.log("ID:", id);
+    console.log("Notiz:", neueNotiz);
+
+    const { data, error } = await supabaseClient
+        .from("vitalitaets_checks")
+        .update({
+            notiz: neueNotiz.trim()
+        })
+        .eq("id", id)
+        .select("id, notiz");
+
+    console.log("Ergebnis:", data);
+    console.log(data);
+console.log(error);
+
+    if (error) {
+        console.error(error);
+        alert(error.message);
+        return;
+    }
+
+    await ladeVitalitaetsChecks();
 }
 
 async function init() {
