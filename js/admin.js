@@ -314,3 +314,12 @@ init();
 
         sortiereNachDatum();
     });
+
+    document
+    .querySelector("#logoutButton")
+    .addEventListener("click", async () => {
+
+        await supabaseClient.auth.signOut();
+
+        window.location.href = "admin-login.html";
+    });

@@ -2300,3 +2300,19 @@ body:has(.final-cta) .footer {
 .admin-link:hover {
     color: #2d6a4f;
 }
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+#logoutButton {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    background-color: #2d6a4f;
+    color: white;
+    cursor: pointer;
+    white-space: nowrap;
+}
