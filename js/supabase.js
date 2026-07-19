@@ -100,3 +100,81 @@ async function saveVitalitaetsCheck(contactData) {
         data: data
     };
 }
+async function updateVitalitaetsBooking(bookingData) {
+    const checkId = sessionStorage.getItem(
+        "vitalitaetsCheckId"
+    );
+
+    if (!checkId) {
+        console.error(
+            "Keine vitalitaetsCheckId im sessionStorage gefunden."
+        );
+
+        return {
+            success: false,
+            error: "Check-ID fehlt"
+        };
+    }
+
+    if (
+        !bookingData ||
+        !bookingData.uid ||
+        !bookingData.startTime
+    ) {
+        console.error(
+            "Cal.com Buchungsdaten sind unvollständig:",
+            bookingData
+        );
+
+        return {
+            success: false,
+            error: "Buchungsdaten fehlen"
+        };
+    }
+
+    console.log(
+        "Buchungsaktualisierung gestartet:",
+        {
+            checkId: checkId,
+            bookingUid: bookingData.uid,
+            bookingStartTime:
+                bookingData.startTime
+        }
+    );
+
+    const { data, error } =
+        await supabaseClient.functions.invoke(
+            "update-vitalitaets-booking",
+            {
+                body: {
+                    checkId: checkId,
+                    bookingUid:
+                        bookingData.uid,
+                    bookingStartTime:
+                        bookingData.startTime
+                }
+            }
+        );
+
+    if (error) {
+        console.error(
+            "Fehler bei der Buchungsaktualisierung:",
+            error
+        );
+
+        return {
+            success: false,
+            error: error
+        };
+    }
+
+    console.log(
+        "Buchungsaktualisierung erfolgreich:",
+        data
+    );
+
+    return {
+        success: true,
+        data: data
+    };
+}

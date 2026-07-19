@@ -750,21 +750,41 @@ showCalendar(contactData);
 
 
                 Cal.ns.nicoPm("on", {
-                    action: "bookingSuccessfulV2",
+    action: "bookingSuccessfulV2",
 
-                    callback: function (event) {
-                        const bookingData =
-                            event &&
-                            event.detail &&
-                            event.detail.data
-                                ? event.detail.data
-                                : {};
+    callback: async function (event) {
+        const bookingData =
+            event &&
+            event.detail &&
+            event.detail.data
+                ? event.detail.data
+                : {};
 
-                        showBookingThankYou(
-                            bookingData
-                        );
-                    }
-                });
+        console.log(
+            "Cal.com Buchungsdaten:",
+            bookingData
+        );
+
+        console.log(
+            "Update-Funktion vorhanden:",
+            typeof updateVitalitaetsBooking
+        );
+
+        const updateResult =
+            await updateVitalitaetsBooking(
+                bookingData
+            );
+
+        console.log(
+            "Ergebnis der Buchungsaktualisierung:",
+            updateResult
+        );
+
+        showBookingThankYou(
+            bookingData
+        );
+    }
+});
 
 
                 function validateContactForm(
