@@ -24,7 +24,7 @@ async function saveVitalitaetsCheck(contactData) {
     try {
         answers = JSON.parse(
             sessionStorage.getItem(
-                "vitalitaetsAnswers"
+                "vitalitaetsAuswertung"
             ) || "{}"
         );
     } catch (error) {
