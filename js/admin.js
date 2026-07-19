@@ -219,6 +219,7 @@ data.data.forEach((check) => {
 <td>${new Date(check.created_at).toLocaleString("de-DE")}</td>
     <td>${check.first_name ?? ""} ${check.last_name ?? ""}</td>
     <td>${check.email ?? ""}</td>
+    <td>${check.phone ?? ""}</td>
     <td>
         ${
             check.booking_start_time
