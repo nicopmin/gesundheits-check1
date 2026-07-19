@@ -18,7 +18,28 @@ async function pdfOeffnen(pdfPath) {
         data.signedUrl,
         "_blank"
     );
-}async function ladeVitalitaetsChecks() {
+    
+}
+async function statusSpeichern(id, neuerStatus) {
+    const { data, error } =
+        await supabaseClient.functions.invoke(
+            "update-customer-status",
+            {
+                body: {
+                    id,
+                    customerStatus: neuerStatus
+                }
+            }
+        );
+
+    if (error) {
+        console.error(error);
+        return;
+    }
+
+    console.log("Status gespeichert:", data);
+}
+async function ladeVitalitaetsChecks() {
     const { data, error } =
         await supabaseClient.functions.invoke(
             "get-vitalitaets-checks"
@@ -41,23 +62,72 @@ data.data.forEach((check) => {
     const row = document.createElement("tr");
 
     row.innerHTML = `
-        <td>${new Date(check.created_at).toLocaleString("de-DE")}</td>
-        <td>${check.first_name ?? ""} ${check.last_name ?? ""}</td>
-        <td>${check.email ?? ""}</td>
-        <td>${check.booking_status ?? ""}</td>
-        <td>
-    ${
-        check.pdf_url
-            ? `<button type="button" onclick="pdfOeffnen('${check.pdf_url}')">
-                   PDF öffnen
-               </button>`
-            : ""
-    }
+    <td>${new Date(check.created_at).toLocaleString("de-DE")}</td>
+    <td>${check.first_name ?? ""} ${check.last_name ?? ""}</td>
+    <td>${check.email ?? ""}</td>
+    <td>
+        ${
+            check.booking_start_time
+                ? new Date(check.booking_start_time).toLocaleString("de-DE")
+                : check.booking_status ?? ""
+        }
+    </td>
+    <td>
+        ${
+            check.pdf_url
+                ? `<button type="button" onclick="pdfOeffnen('${check.pdf_url}')">
+                       PDF öffnen
+                   </button>`
+                : ""
+        }
+    </td>
+    <td>
+    <select onchange="statusSpeichern('${check.id}', this.value)">
+        <option ${
+            (check.customer_status ?? "Neu") === "Neu"
+                ? "selected"
+                : ""
+        }>Neu</option>
+
+        <option ${
+            check.customer_status === "Beratung erfolgt"
+                ? "selected"
+                : ""
+        }>Beratung erfolgt</option>
+
+        <option ${
+            check.customer_status === "Kunde geworden"
+                ? "selected"
+                : ""
+        }>Kunde geworden</option>
+
+        <option ${
+            check.customer_status === "Kein Interesse"
+                ? "selected"
+                : ""
+        }>Kein Interesse</option>
+    </select>
 </td>
-    `;
+`;
 
     tbody.appendChild(row);
 });
 }
 
 ladeVitalitaetsChecks();
+const suchfeld = document.getElementById("suche");
+
+suchfeld.addEventListener("input", () => {
+    const suchtext = suchfeld.value.toLowerCase();
+    const zeilen = document.querySelectorAll(
+        "#checksTable tbody tr"
+    );
+
+    zeilen.forEach((zeile) => {
+        const inhalt = zeile.textContent.toLowerCase();
+
+        zeile.style.display = inhalt.includes(suchtext)
+            ? ""
+            : "none";
+    });
+});
