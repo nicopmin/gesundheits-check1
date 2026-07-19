@@ -945,6 +945,13 @@ window.addEventListener("vitalitaetsPdfBereit", (event) => {
                 calendarConfig.email =
                     contactData.email;
             }
+            
+            if (contactData.phone) {
+    calendarConfig.location = JSON.stringify({
+        value: "phone",
+        optionValue: contactData.phone
+    });
+}
 
 
             /*
