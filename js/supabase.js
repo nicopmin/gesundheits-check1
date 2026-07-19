@@ -264,11 +264,6 @@ async function uploadVitalitaetsPdf() {
         };
     }
 
-    sessionStorage.setItem(
-        "vitalitaetsPdfPfad",
-        data.pdfPath
-    );
-
     return {
         success: true,
         data: data
@@ -289,15 +284,7 @@ async function updateVitalitaetsBooking(bookingData) {
             error: "Check-ID fehlt"
         };
     }
-    console.log(
-    "Funktions-Test:",
-    {
-        uploadVitalitaetsPdf:
-            typeof uploadVitalitaetsPdf,
-        updateVitalitaetsBooking:
-            typeof updateVitalitaetsBooking
-    }
-);
+
     if (
         !bookingData ||
         !bookingData.uid ||
@@ -358,4 +345,3 @@ async function updateVitalitaetsBooking(bookingData) {
         data: data
     };
 }
-console.log("supabase.js Ende erreicht");
