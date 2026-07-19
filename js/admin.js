@@ -50,7 +50,29 @@ async function statusSpeichern(id, neuerStatus) {
         statusPunkt.className = `status-dot status-${statusKlasse}`;
     }
 
-    console.log("Status gespeichert:", data);
+aktualisiereStatistiken();
+    
+console.log("Status gespeichert:", data);
+}
+function aktualisiereStatistiken() {
+    const statusPunkte = document.querySelectorAll(".status-dot");
+
+    let neu = 0;
+    let beratung = 0;
+    let kunde = 0;
+    let keinInteresse = 0;
+
+    statusPunkte.forEach((punkt) => {
+        if (punkt.classList.contains("status-neu")) neu++;
+        if (punkt.classList.contains("status-beratung-erfolgt")) beratung++;
+        if (punkt.classList.contains("status-kunde-geworden")) kunde++;
+        if (punkt.classList.contains("status-kein-interesse")) keinInteresse++;
+    });
+
+    document.querySelector("#stat-neu").textContent = neu;
+    document.querySelector("#stat-beratung").textContent = beratung;
+    document.querySelector("#stat-kunde").textContent = kunde;
+    document.querySelector("#stat-kein").textContent = keinInteresse;
 }
 async function ladeVitalitaetsChecks() {
     const { data, error } =
@@ -70,6 +92,27 @@ async function ladeVitalitaetsChecks() {
 tbody.innerHTML = "";
 
 console.log("PDF-Wert:", data.data[0]?.pdf_url);
+
+const anzahlNeu = data.data.filter(
+    check => (check.customer_status ?? "Neu") === "Neu"
+).length;
+
+const anzahlBeratung = data.data.filter(
+    check => check.customer_status === "Beratung erfolgt"
+).length;
+
+const anzahlKunden = data.data.filter(
+    check => check.customer_status === "Kunde geworden"
+).length;
+
+const anzahlKeinInteresse = data.data.filter(
+    check => check.customer_status === "Kein Interesse"
+).length;
+
+document.querySelector("#stat-neu").textContent = anzahlNeu;
+document.querySelector("#stat-beratung").textContent = anzahlBeratung;
+document.querySelector("#stat-kunde").textContent = anzahlKunden;
+document.querySelector("#stat-kein").textContent = anzahlKeinInteresse;
 
 data.data.forEach((check) => {
     const row = document.createElement("tr");
