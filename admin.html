@@ -45,12 +45,22 @@
 
 </div>
         <div class="admin-toolbar">
-            <input
-                type="text"
-                id="suche"
-                placeholder="Nach Name oder E-Mail suchen..."
-            >
-        </div>
+
+    <input
+        type="text"
+        id="suche"
+        placeholder="Nach Name oder E-Mail suchen..."
+    >
+
+    <select id="statusFilter">
+        <option value="Alle">Alle Status</option>
+        <option value="Neu">Neu</option>
+        <option value="Beratung erfolgt">Beratung erfolgt</option>
+        <option value="Kunde geworden">Kunde geworden</option>
+        <option value="Kein Interesse">Kein Interesse</option>
+    </select>
+
+</div>
 
         <div class="admin-table-wrapper">
             <table id="checksTable">
@@ -75,6 +85,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/supabase.js"></script>
-    <script src="js/admin.js"></script>
+    <script src="js/admin.js?v=2"></script>
 </body>
 </html>

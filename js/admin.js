@@ -51,6 +51,8 @@ async function statusSpeichern(id, neuerStatus) {
     }
 
 aktualisiereStatistiken();
+
+
     
 console.log("Status gespeichert:", data);
 }
@@ -73,6 +75,41 @@ function aktualisiereStatistiken() {
     document.querySelector("#stat-beratung").textContent = beratung;
     document.querySelector("#stat-kunde").textContent = kunde;
     document.querySelector("#stat-kein").textContent = keinInteresse;
+}
+
+function filtereTabelle() {
+    console.log("Filter läuft");
+
+    const suchtext = document
+        .querySelector("#suche")
+        .value
+        .toLowerCase();
+
+    const ausgewaehlterStatus =
+        document.querySelector("#statusFilter").value;
+
+    const zeilen = document.querySelectorAll(
+        "#checksTable tbody tr"
+    );
+
+    zeilen.forEach((zeile) => {
+        const zeilenText = zeile.textContent.toLowerCase();
+
+        const statusSelect = zeile.querySelector("select");
+        const status = statusSelect ? statusSelect.value : "";
+
+        const passtZurSuche = zeilenText.includes(suchtext);
+
+        const passtZumStatus =
+            ausgewaehlterStatus === "Alle" ||
+            status === ausgewaehlterStatus;
+
+        zeile.style.display =
+            passtZurSuche && passtZumStatus
+                ? ""
+                : "none";
+    });
+
 }
 async function ladeVitalitaetsChecks() {
     const { data, error } =
@@ -180,20 +217,14 @@ data.data.forEach((check) => {
 });
 }
 
-ladeVitalitaetsChecks();
-const suchfeld = document.getElementById("suche");
+ladeVitalitaetsChecks().then(() => {
 
-suchfeld.addEventListener("input", () => {
-    const suchtext = suchfeld.value.toLowerCase();
-    const zeilen = document.querySelectorAll(
-        "#checksTable tbody tr"
-    );
+    document
+        .querySelector("#suche")
+        .addEventListener("input", filtereTabelle);
 
-    zeilen.forEach((zeile) => {
-        const inhalt = zeile.textContent.toLowerCase();
+    document
+        .querySelector("#statusFilter")
+        .addEventListener("change", filtereTabelle);
 
-        zeile.style.display = inhalt.includes(suchtext)
-            ? ""
-            : "none";
-    });
 });

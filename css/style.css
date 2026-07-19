@@ -2161,16 +2161,28 @@ body:has(.final-cta) .footer {
 }
 
 .admin-toolbar {
+    display: flex;
+    gap: 16px;
+    align-items: center;
     margin: 28px 0 20px;
+    flex-wrap: wrap;
 }
 
-.admin-toolbar input {
-    width: 100%;
-    max-width: 420px;
+.admin-toolbar input,
+.admin-toolbar select {
     padding: 12px 14px;
     border: 1px solid #cfd8d3;
     border-radius: 8px;
     font-size: 1rem;
+}
+
+.admin-toolbar input {
+    flex: 1;
+    min-width: 280px;
+}
+
+.admin-toolbar select {
+    min-width: 220px;
 }
 
 .admin-table-wrapper {
